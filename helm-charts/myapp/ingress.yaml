@@ -2,8 +2,8 @@ apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   name: my-ingress
-#  annotations:
-#    cert-manager.io/cluster-issuer: letsencrypt-issuer-dns-do
+  annotations:
+    cert-manager.io/cluster-issuer: letsencrypt-issuer-dns-do
 spec:
   ingressClassName: nginx
   rules:
