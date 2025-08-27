@@ -14,6 +14,6 @@ spec:
     spec:
       containers:
         - name: nginx
-          image: nginx:1.17-alpine
+          image: registry.digitalocean.com/my-registry123/mygoapp:65662ee06f538d70093e72b65e3bd3de5841d071
           ports:
             - containerPort: 80
