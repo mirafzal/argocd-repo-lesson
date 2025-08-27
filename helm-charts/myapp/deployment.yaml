@@ -17,3 +17,15 @@ spec:
           image: registry.digitalocean.com/my-registry123/mygoapp:65662ee06f538d70093e72b65e3bd3de5841d071
           ports:
             - containerPort: 8080
+          readinessProbe:
+            httpGet:
+              path: /ping
+              port: 8080
+            initialDelaySeconds: 5
+            periodSeconds: 3
+          livenessProbe:
+            httpGet:
+              path: /ping
+              port: 8080
+            initialDelaySeconds: 5
+            periodSeconds: 3
