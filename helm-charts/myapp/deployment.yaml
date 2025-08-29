@@ -12,6 +12,13 @@ spec:
       labels:
         app: nginx
     spec:
+      resources:
+        requests:
+          cpu: 400m
+          memory: 500Mi
+        limits:
+          cpu: 400m
+          memory: 500Mi
       affinity:
         nodeAffinity:
           preferredDuringSchedulingIgnoredDuringExecution:
