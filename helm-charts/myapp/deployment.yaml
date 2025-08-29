@@ -3,7 +3,7 @@ kind: Deployment
 metadata:
   name: myapp-deployment
 spec:
-  replicas: 5
+  replicas: 20
   selector:
     matchLabels:
       app: nginx
@@ -14,18 +14,18 @@ spec:
     spec:
       containers:
         - name: nginx
-          image: registry.digitalocean.com/my-registry123/mygoapp:65662ee06f538d70093e72b65e3bd3de5841d071
+          image: nginx:1.17-alpine
           ports:
-            - containerPort: 8080
+            - containerPort: 80
           readinessProbe:
             httpGet:
-              path: /ping
-              port: 8080
+              path: /
+              port: 80
             initialDelaySeconds: 5
             periodSeconds: 3
           livenessProbe:
             httpGet:
-              path: /ping
-              port: 8080
+              path: /
+              port: 80
             initialDelaySeconds: 5
             periodSeconds: 3
