@@ -15,3 +15,16 @@ spec:
   # Require 1Gi of space
   storage:
     size: 1Gi
+
+  affinity:
+    podAntiAffinity:
+      preferredDuringSchedulingIgnoredDuringExecution:
+        - podAffinityTerm:
+            labelSelector:
+              matchExpressions:
+                - key: cnpg.io/cluster
+                  operator: In
+                  values:
+                    - dev-postgres-db
+            topologyKey: kubernetes.io/hostname
+          weight: 100
