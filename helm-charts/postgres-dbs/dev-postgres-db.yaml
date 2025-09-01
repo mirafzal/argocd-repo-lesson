@@ -3,7 +3,7 @@ kind: Cluster
 metadata:
   name: dev-postgres-db
 spec:
-  instances: 1
+  instances: 3
 
   # Example of rolling update strategy:
   # - unsupervised: automated update of the primary once all
