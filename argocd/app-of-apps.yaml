@@ -14,3 +14,5 @@ spec:
     path: argocd/apps
     repoURL: https://github.com/mirafzal/argocd-repo-lesson
     targetRevision: main
+    directory:
+      recurse: true
