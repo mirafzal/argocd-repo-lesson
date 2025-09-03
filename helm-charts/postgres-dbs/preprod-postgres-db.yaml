@@ -14,7 +14,7 @@ spec:
 
   # Require 1Gi of space
   storage:
-    storageClass: standard
+    storageClass: nfs-csi
     size: 1Gi
 
   affinity:
