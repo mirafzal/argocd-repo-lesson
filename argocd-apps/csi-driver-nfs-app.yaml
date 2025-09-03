@@ -30,7 +30,7 @@ spec:
             server: 10.0.0.107
             share: /srv/nfs_share
             subDir:
-            mountPermissions: "0"
+            mountPermissions: "0777"
 #            csi.storage.k8s.io/provisioner-secret is only needed for providing mountOptions in DeleteVolume
 #            csi.storage.k8s.io/provisioner-secret-name: "mount-options"
 #            csi.storage.k8s.io/provisioner-secret-namespace: "default"
@@ -58,4 +58,8 @@ spec:
           # Create volume snapshot CRDs.
           customResourceDefinitions:
             enabled: true
-
+        feature:
+          enableFSGroupPolicy: true     # creates/patches the CSIDriver object
+        controller:
+          driver:
+            fsGroupPolicy: None         # prevent kubelet recursive chgrp on NFS

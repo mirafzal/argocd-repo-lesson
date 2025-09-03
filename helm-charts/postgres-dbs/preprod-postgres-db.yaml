@@ -21,3 +21,7 @@ spec:
     enablePodAntiAffinity: true
     topologyKey: kubernetes.io/hostname
     podAntiAffinityType: required
+
+  podTemplate:
+    securityContext:
+      fsGroupChangePolicy: "OnRootMismatch"
