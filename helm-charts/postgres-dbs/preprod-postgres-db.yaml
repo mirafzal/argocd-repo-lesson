@@ -3,7 +3,7 @@ kind: Cluster
 metadata:
   name: preprod-postgres-db
 spec:
-  instances: 3
+  instances: 1
 
   # Example of rolling update strategy:
   # - unsupervised: automated update of the primary once all
@@ -14,14 +14,14 @@ spec:
 
   # Require 1Gi of space
   storage:
-    storageClass: nfs-csi
     size: 1Gi
 
   affinity:
     enablePodAntiAffinity: true
     topologyKey: kubernetes.io/hostname
     podAntiAffinityType: required
+    tolerations:
+      - key: "postgres-db-node"
+        operator: "Exists"
+        effect: "NoSchedule"
 
-  podTemplate:
-    securityContext:
-      fsGroupChangePolicy: "OnRootMismatch"
