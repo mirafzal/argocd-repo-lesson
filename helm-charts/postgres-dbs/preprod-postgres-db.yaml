@@ -1,7 +1,7 @@
 apiVersion: postgresql.cnpg.io/v1
 kind: Cluster
 metadata:
-  name: dev-postgres-db
+  name: preprod-postgres-db
 spec:
   instances: 3
 
