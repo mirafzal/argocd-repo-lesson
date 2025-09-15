@@ -32,11 +32,11 @@ spec:
             - containerPort: 80
           resources:
             requests:
-              cpu: 400m
-              memory: 500Mi
+              cpu: 100m
+              memory: 100Mi
             limits:
-              cpu: 400m
-              memory: 500Mi
+              cpu: 100m
+              memory: 100Mi
           readinessProbe:
             httpGet:
               path: /
