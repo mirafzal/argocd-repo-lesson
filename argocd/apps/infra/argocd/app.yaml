@@ -1,0 +1,31 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: argocd
+  namespace: argocd
+spec:
+  project: infra-app-project
+  destination:
+    namespace: argocd
+    server: https://kubernetes.default.svc
+  source:
+    repoURL: https://argoproj.github.io/argo-helm
+    targetRevision: 8.5.0
+    chart: argo-cd
+    helm:
+      valuesObject:
+        global:
+          domain: argocd.mirafzal.uz
+        configs:
+          params:
+            server.insecure: true
+        server:
+          ingress:
+            enabled: true
+            ingressClassName: nginx
+            annotations:
+              nginx.ingress.kubernetes.io/force-ssl-redirect: "true"
+              nginx.ingress.kubernetes.io/backend-protocol: "HTTP"
+              cert-manager.io/cluster-issuer: letsencrypt-issuer-dns-do
+            hostname: argocd.mirafzal.uz
+            tls: true

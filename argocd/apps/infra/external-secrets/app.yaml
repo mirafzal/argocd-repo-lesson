@@ -4,7 +4,7 @@ metadata:
   name: external-secrets
   namespace: argocd
 spec:
-  project: default
+  project: infra-app-project
   destination:
     namespace: external-secrets
     server: https://kubernetes.default.svc
