@@ -1,3 +1,2 @@
 csi-driver-nfs
-external-secrets
 metallb-system
