@@ -66,7 +66,7 @@ ingress:
           pathType: ImplementationSpecific
   tls:
     - hosts:
-        - mirafzal.uz
+        - mydjangoapp.mirafzal.uz
       secretName: mydjangoapp-cert-secret
 resources: {}
 # We usually recommend not to specify default resources and to leave this as a conscious
