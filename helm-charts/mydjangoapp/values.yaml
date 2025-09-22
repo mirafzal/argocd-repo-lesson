@@ -150,3 +150,8 @@ celery:
 
 redis:
   architecture: standalone
+  auth:
+    enabled: false
+  master:
+    pdb:
+      create: false
