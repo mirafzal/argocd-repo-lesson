@@ -118,3 +118,7 @@ volumeMounts: []
 nodeSelector: {}
 tolerations: []
 affinity: {}
+
+envFrom:
+  - secretRef:
+      name: myapp-creds-secret
