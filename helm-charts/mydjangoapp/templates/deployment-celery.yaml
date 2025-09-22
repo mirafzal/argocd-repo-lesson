@@ -64,16 +64,16 @@ spec:
           {{- end }}
           # Probes for a worker (no HTTP):
           # Simple liveness checking that the process exists.
-          livenessProbe:
-            exec:
-              command: ["bash","-lc","pgrep -f 'celery worker' >/dev/null"]
-            initialDelaySeconds: 20
-            periodSeconds: 20
-          readinessProbe:
-            exec:
-              command: ["bash","-lc","pgrep -f 'celery worker' >/dev/null"]
-            initialDelaySeconds: 10
-            periodSeconds: 15
+{{/*          livenessProbe:*/}}
+{{/*            exec:*/}}
+{{/*              command: ["bash","-lc","pgrep -f 'celery worker' >/dev/null"]*/}}
+{{/*            initialDelaySeconds: 20*/}}
+{{/*            periodSeconds: 20*/}}
+{{/*          readinessProbe:*/}}
+{{/*            exec:*/}}
+{{/*              command: ["bash","-lc","pgrep -f 'celery worker' >/dev/null"]*/}}
+{{/*            initialDelaySeconds: 10*/}}
+{{/*            periodSeconds: 15*/}}
       {{- with .Values.celery.volumes }}
       volumes:
         {{- toYaml . | nindent 8 }}
