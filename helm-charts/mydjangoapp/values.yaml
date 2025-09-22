@@ -122,3 +122,28 @@ affinity: {}
 envFrom:
   - secretRef:
       name: myapp-creds-secret
+
+celery:
+  enabled: true
+  replicaCount: 1
+  command: ["celery", "-A", "mydjangoapp", "worker", "-l", "INFO", "-Q", "default"]
+  # optional args override:
+  # args: []
+  env: []        # e.g. [{"name":"CELERYD_CONCURRENCY","value":"2"}]
+  envFrom:
+    - secretRef:
+        name: myapp-creds-secret   # can reuse your existing .Values.envFrom if you want
+  resources: {}
+  nodeSelector: {}
+  tolerations: []
+  affinity: {}
+  podLabels: {}
+  podAnnotations: {}
+  securityContext: {}
+  podSecurityContext: {}
+  image:
+    repository: "{{ .Values.image.repository }}"  # reuse same image
+    tag: "{{ .Values.image.tag | default .Chart.AppVersion }}"
+    pullPolicy: "{{ .Values.image.pullPolicy }}"
+  volumeMounts: []
+  volumes: []

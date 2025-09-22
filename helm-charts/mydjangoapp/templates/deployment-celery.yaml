@@ -1,0 +1,93 @@
+{{- if .Values.celery.enabled }}
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ include "mydjangoapp.fullname" . }}-celery
+  labels:
+    {{- include "mydjangoapp.labels" . | nindent 4 }}
+    app.kubernetes.io/component: celery
+spec:
+  replicas: {{ .Values.celery.replicaCount }}
+  selector:
+    matchLabels:
+      {{- include "mydjangoapp.selectorLabels" . | nindent 6 }}
+      app.kubernetes.io/component: celery
+  template:
+    metadata:
+      labels:
+        {{- include "mydjangoapp.labels" . | nindent 8 }}
+        app.kubernetes.io/component: celery
+        {{- with .Values.celery.podLabels }}
+        {{- toYaml . | nindent 8 }}
+        {{- end }}
+      {{- with .Values.celery.podAnnotations }}
+      annotations:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+    spec:
+      serviceAccountName: {{ include "mydjangoapp.serviceAccountName" . }}
+      {{- with .Values.celery.podSecurityContext }}
+      securityContext:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.imagePullSecrets }}
+      imagePullSecrets:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      containers:
+        - name: celery
+          image: "{{ tpl .Values.celery.image.repository . }}:{{ tpl .Values.celery.image.tag . }}"
+          imagePullPolicy: {{ tpl .Values.celery.image.pullPolicy . }}
+          {{- with .Values.celery.securityContext }}
+          securityContext:
+            {{- toYaml . | nindent 12 }}
+          {{- end }}
+          command: {{- toYaml .Values.celery.command | nindent 12 }}
+          {{- with .Values.celery.args }}
+          args: {{- toYaml . | nindent 12 }}
+          {{- end }}
+          env:
+            {{- with .Values.celery.env }}
+            {{- toYaml . | nindent 12 }}
+            {{- end }}
+          {{- with .Values.celery.envFrom }}
+          envFrom:
+            {{- toYaml . | nindent 12 }}
+          {{- end }}
+          {{- with .Values.celery.resources }}
+          resources:
+            {{- toYaml . | nindent 12 }}
+          {{- end }}
+          {{- with .Values.celery.volumeMounts }}
+          volumeMounts:
+            {{- toYaml . | nindent 12 }}
+          {{- end }}
+          # Probes for a worker (no HTTP):
+          # Simple liveness checking that the process exists.
+          livenessProbe:
+            exec:
+              command: ["bash","-lc","pgrep -f 'celery worker' >/dev/null"]
+            initialDelaySeconds: 20
+            periodSeconds: 20
+          readinessProbe:
+            exec:
+              command: ["bash","-lc","pgrep -f 'celery worker' >/dev/null"]
+            initialDelaySeconds: 10
+            periodSeconds: 15
+      {{- with .Values.celery.volumes }}
+      volumes:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.celery.nodeSelector }}
+      nodeSelector:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.celery.affinity }}
+      affinity:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.celery.tolerations }}
+      tolerations:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+{{- end }}
