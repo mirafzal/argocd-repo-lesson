@@ -126,7 +126,7 @@ envFrom:
 celery:
   enabled: true
   replicaCount: 1
-  command: ["celery", "-A", "mydjangoapp", "worker", "-l", "INFO", "-Q", "default"]
+  command: ["celery", "-A", "mydjangoapp", "worker", "-l", "INFO"]
   # optional args override:
   # args: []
   env: []        # e.g. [{"name":"CELERYD_CONCURRENCY","value":"2"}]
