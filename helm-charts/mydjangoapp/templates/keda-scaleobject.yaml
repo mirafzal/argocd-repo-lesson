@@ -1,0 +1,14 @@
+apiVersion: keda.sh/v1alpha1
+kind: ScaledObject
+metadata:
+  name: celery-redis-scaledobject
+spec:
+  scaleTargetRef:
+    name: mydjangoapp-celery
+  triggers:
+    - type: redis
+      metadata:
+        address: "mydjangoapp-redis-master:6379"
+        databaseIndex: "0"
+        listName: celery
+        listLength: "2"
