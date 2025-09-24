@@ -134,7 +134,7 @@ celery:
     "celery", "-A", "mydjangoapp", "worker",
     "--pool=prefork",
     "-c", "1",
-    "-l", "INFO"
+    "-l", "INFO",
     "--prefetch-multiplier=1",
     "--max-tasks-per-child=100"
   ]
