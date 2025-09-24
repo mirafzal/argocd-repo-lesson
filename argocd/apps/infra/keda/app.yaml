@@ -1,0 +1,16 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: keda
+  namespace: argocd
+spec:
+  project: infra-app-project
+  destination:
+    namespace: keda
+    server: https://kubernetes.default.svc
+  source:
+    repoURL: https://kedacore.github.io/charts
+    targetRevision: 2.17.2
+    chart: keda
+    helm:
+      valuesObject:
