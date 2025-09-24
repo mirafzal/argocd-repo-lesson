@@ -14,12 +14,67 @@ spec:
     chart: argo-cd
     helm:
       valuesObject:
+        controller:
+          resources:
+            limits:
+              cpu: 1
+              memory: 1024Mi
+            requests:
+              cpu: 500m
+              memory: 512Mi
+        redis:
+          resources:
+            limits:
+              cpu: 100m
+              memory: 100Mi
+            requests:
+              cpu: 10m
+              memory: 20Mi
+        repoServer:
+          resources:
+            limits:
+              cpu: 500m
+              memory: 200Mi
+            requests:
+              cpu: 100m
+              memory: 100Mi
+        applicationSet:
+          resources:
+            limits:
+              cpu: 100m
+              memory: 100Mi
+            requests:
+              cpu: 10m
+              memory: 50Mi
+        notifications:
+          resources:
+            limits:
+              cpu: 100m
+              memory: 100Mi
+            requests:
+              cpu: 10m
+              memory: 50Mi
+        dex:
+          resources:
+            limits:
+              cpu: 100m
+              memory: 100Mi
+            requests:
+              cpu: 10m
+              memory: 50Mi
         global:
           domain: argocd.mirafzal.uz
         configs:
           params:
             server.insecure: true
         server:
+          resources:
+            limits:
+              cpu: 500m
+              memory: 200Mi
+            requests:
+              cpu: 100m
+              memory: 100Mi
           ingress:
             enabled: true
             ingressClassName: nginx
