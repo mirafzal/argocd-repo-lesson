@@ -8,7 +8,7 @@ spec:
   triggers:
     - type: redis
       metadata:
-        address: "mydjangoapp-redis-master:6379"
+        address: "mydjangoapp-redis-master.mydjangoapp.svc.cluster.local:6379"
         databaseIndex: "0"
         listName: celery
         listLength: "2"
