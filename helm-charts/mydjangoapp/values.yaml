@@ -10,7 +10,7 @@ image:
   # This sets the pull policy for images.
   pullPolicy: IfNotPresent
   # Overrides the image tag whose default is the chart appVersion.
-  tag: "43643f61385d9f6ab0adca281b2b1136c9fd1bc7"
+  tag: "9fdd06e4aa27ba8a4378d3999cc43cd62efeeea1"
 # This is for the secrets for pulling an image from a private repository more information can be found here: https://kubernetes.io/docs/tasks/configure-pod-container/pull-image-private-registry/
 imagePullSecrets:
   - name: my-registry123
@@ -124,21 +124,19 @@ volumeMounts: []
 nodeSelector: {}
 tolerations: []
 affinity: {}
-
 envFrom:
   - secretRef:
       name: myapp-creds-secret
-
 celery:
   enabled: true
   replicaCount: 1
   command: ["celery", "-A", "mydjangoapp", "worker", "-l", "INFO"]
   # optional args override:
   # args: []
-  env: []        # e.g. [{"name":"CELERYD_CONCURRENCY","value":"2"}]
+  env: [] # e.g. [{"name":"CELERYD_CONCURRENCY","value":"2"}]
   envFrom:
     - secretRef:
-        name: myapp-creds-secret   # can reuse your existing .Values.envFrom if you want
+        name: myapp-creds-secret # can reuse your existing .Values.envFrom if you want
   resources:
     limits:
       cpu: 200m
@@ -154,12 +152,11 @@ celery:
   securityContext: {}
   podSecurityContext: {}
   image:
-    repository: "{{ .Values.image.repository }}"  # reuse same image
+    repository: "{{ .Values.image.repository }}" # reuse same image
     tag: "{{ .Values.image.tag | default .Chart.AppVersion }}"
     pullPolicy: "{{ .Values.image.pullPolicy }}"
   volumeMounts: []
   volumes: []
-
 redis:
   architecture: standalone
   auth:
