@@ -19,3 +19,17 @@ kubectl apply -f argocd/app-of-apps.yaml
 ```
 kubectl port-forward service/argocd-server -n argocd 8080:443
 ```
+
+---
+Test celery tasks:
+```
+k -n mydjangoapp exec -it mydjangoapp-celery-77fcfb88bc-scblz -- sh
+```
+```
+python manage.py shell
+```
+```
+from mydjangoapp.celery import long_task
+for i in range(100):
+    long_task.delay()
+```
